@@ -1,0 +1,6 @@
+	Rus Mat Phy Lit
+Lukin	3   1   4   4
+Petrov	5   4   3   3
+Repov	5   4   4   5
+Sidorov	5   4   3   1
+X	3   3   4   4
