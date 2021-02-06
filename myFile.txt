@@ -1,6 +1,6 @@
-	Rus Mat Phy Lit
-Lukin	3   1   4   4
-Petrov	5   4   3   3
-Repov	5   4   4   5
-Sidorov	5   4   3   1
-X	3   3   4   4
+	Rus Mat Phy Lit Cpp PHP 
+X	1   2   3   4   3   3
+Petrov	4   5   1   2   3   4
+Sidorov	4   4   4   4   3   3
+Repov	2   2   3   5   3   4
+Lukin	1   2   5   3   3   4
