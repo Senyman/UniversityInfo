@@ -1,6 +1,6 @@
-	Rus Mat Phy Lit Cpp PHP 
-X	1   2   3   4   3   3
-Petrov	4   5   1   2   3   4
-Sidorov	4   4   4   4   3   3
-Repov	2   2   3   5   3   4
-Lukin	1   2   5   3   3   4
+Num	Surname	Rus Mat Lit TKM 
+12	Зубкова	5   5   5   5
+14	Сосиска	5   5   5   5
+8	Porohov	3   4   5   2
+10	Skr	1   2   3   4
+9	Sorokin	4   5   2   1

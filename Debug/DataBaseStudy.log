@@ -1,4 +1,6 @@
 ﻿  DataBaseStudy.cpp
-C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(145,47): warning C4018: '<': signed/unsigned mismatch
-C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(517,39): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(101,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(181,51): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(237,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(711,43): warning C4018: '<': signed/unsigned mismatch
   DataBaseStudy.vcxproj -> C:\Users\User\source\repos\DataBaseStudy\Debug\DataBaseStudy.exe
