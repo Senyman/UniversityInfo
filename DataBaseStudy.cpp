@@ -7,9 +7,6 @@ using namespace std;
 
 int main()
 {
-    
-
-
         SetConsoleCP(1251);
         SetConsoleOutputCP(1251);
 
@@ -17,6 +14,8 @@ int main()
         cout << "Выберите действие ниже и введите соответствующую цифру" << endl << endl;
         string path = "myFile.txt";
         string pathLessons = "Lessons.txt";
+        string pathSubjects = "Subjects.txt";
+        string pathSubjects3 = "Subjects3.txt";
         string pathStudents = "Students.txt";
         string pathRatings = "Ratings.txt";
         string bufferpath = "C:\\Users\\User\\Desktop\\myFile1.txt";          // Путь на рабочий стол
@@ -36,14 +35,12 @@ int main()
         ifstream finStudents;
         ifstream finKeys;
         ifstream finLessons;
-
-
+        ifstream finSubjects;
         int a = 1;
         int subjectscount = 0;
         int pupilcount = 0;
         int size;
     
-
     do
     {
         cout<< "0 - Подсказки и помощь" << endl
@@ -56,7 +53,9 @@ int main()
             << "7 - Удалить данные о студенте. Сначала рекомендуется выполнить действие 1 (узнать номер студента)" << endl
             << "8 - Добавить данные о предмете" << endl
             << "9 - Удалить данные о предмете и всю связанную с ним информацию" << endl
-            << "10 - Закрыть программу"<<endl<<endl
+            << "10 - Вывести данные с расшифровкой аббревиатур предметов"<<endl
+            << "11 - Добавить рашифровку аббревиатуры для предмета"<<endl
+            << "12 - Закрыть программу"<<endl<<endl
             << "Введите номер действия: ";
 
         int maxsize = 0;
@@ -65,12 +64,24 @@ int main()
         size = enteredvalue.length();			// Вычисляем количество символов в строке
         bool err = false;						// Если err true, то введенное число некорректно
         const char* str = enteredvalue.c_str();	// Приводим строку к массиву char, что бы далее работать с функцией  isdigit
-        if ((size > 1 || !isdigit(str[0])) && enteredvalue != "10") err = true;       // Если неправильно ввел данные
+        if ((size > 1 || !isdigit(str[0])) && enteredvalue != "10" && enteredvalue != "11" && enteredvalue != "12") err = true;       // Если неправильно ввел данные
 
-        if (err) cout << "Я не поняла того, что вы написали: " << enteredvalue <<endl<<endl;
+        if (err)
+        {
+            system("cls");
+            cout << "Я не поняла того, что вы написали: " << enteredvalue << endl << endl;
+        }
         else
         {
-            if (size>1)
+            if (size>1 && enteredvalue == "12")
+            {
+                a = 12;
+            }
+            else if(size > 1 && enteredvalue == "11")
+            {
+                a = 11;
+            }
+            else if (size > 1 && enteredvalue == "10")
             {
                 a = 10;
             }
@@ -78,10 +89,7 @@ int main()
             // cout << "Вы ввели правильное число: " << enteredvalue << endl;
             subjectscount = 0;
             fin.open(pathLessons);       // Считаем количество предметов
-            if (!fin.is_open())
-            {
-                cout << "Ошибка открытия файла" << endl;
-            }
+            if (!fin.is_open()) cout << "Ошибка открытия файла" << endl;
             else
             {
                 string str;
@@ -1136,8 +1144,33 @@ int main()
                 << "Выбрав действие 8 нужно ввести только аббривиатуру предмета (3 символа) из предложенных, далее программа все сделает сама;" << endl
                 << "Если возникнут вопросы, обращайтесь к системному администратору" << endl<<endl<<endl;
             }
-            else exit(10);
-        }  
+            else if (a == 10)
+            {
+                finLessons.open(pathLessons);
+                finSubjects.open(pathSubjects);
+                string lesson;
+                string subject;
+                cout << endl << endl;
+                cout << "Данные о предметах" << endl;
+                if (!finLessons.is_open() && !finSubjects.is_open()) cout << "Ошибка открытия файла" << endl;
+                else
+                {
+                    while (!finLessons.eof() && !finSubjects.eof())
+                    {
+                        lesson = "";
+                        subject = "";
+                        getline(finLessons, lesson);
+                        getline(finSubjects, subject);
+                        cout << lesson << " - " << subject << endl;
+                    }
+                }
+                finLessons.close();
+                finSubjects.close();
+                cout << endl << endl;
+            }
+            else exit(12);
+          
+        }
     }
     while (true);
 }

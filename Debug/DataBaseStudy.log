@@ -1,8 +1,8 @@
 ﻿  DataBaseStudy.cpp
-C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(110,32): warning C4018: '<': signed/unsigned mismatch
-C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(190,51): warning C4018: '<': signed/unsigned mismatch
-C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(247,37): warning C4018: '<': signed/unsigned mismatch
-C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(758,40): warning C4553: '==': result of expression not used; did you intend '='?
-C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(1097,43): warning C4018: '<': signed/unsigned mismatch
-C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(389,25): warning C4101: 'necessaryquantitysymbols': unreferenced local variable
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(118,32): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(198,51): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(255,37): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(766,40): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(1105,43): warning C4018: '<': signed/unsigned mismatch
+C:\Users\User\source\repos\DataBaseStudy\DataBaseStudy\DataBaseStudy.cpp(397,25): warning C4101: 'necessaryquantitysymbols': unreferenced local variable
   DataBaseStudy.vcxproj -> C:\Users\User\source\repos\DataBaseStudy\Debug\DataBaseStudy.exe
