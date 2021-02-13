@@ -1,6 +1,6 @@
-Num	Surname	Rus Mat Lit TKM 
-12	Зубкова	5   5   5   5
-14	Сосиска	5   5   5   5
-8	Porohov	3   4   5   2
-10	Skr	1   2   3   4
-9	Sorokin	4   5   2   1
+Num	Surname		Rus Mat Ris 
+3	Sidorov		4   4   5
+4	Repov		2   2   4
+7	Petrov_U.R.	3   4   5
+2	Petrov_A.R.	4   5   4
+5	Lukin		1   2   5
