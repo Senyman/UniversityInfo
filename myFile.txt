@@ -1,7 +1,5 @@
-Num	Surname		Rus Mat Ris 
-2	Petrov_A.R.	4   5   4
-3	Sidorov		4   4   5
-4	Репов		2   2   4
-5	Лукин		1   2   5
-7	Petrov_U.R.	3   4   5
-8	Мамонов		4   3   4
+1	X Y.Z.		1   2   3   4
+2	Petrov S.P.	4   5   1   2
+3	Sidorov V.S.	4   4   4   4
+4	Repov K.M.	2   2   3   5
+5	Lapnikov P.I.	1   2   5   3
