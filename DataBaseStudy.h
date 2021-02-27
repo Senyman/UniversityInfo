@@ -5,6 +5,9 @@
 #include <Windows.h>
 #include <string>
 #include <shlobj.h> // Для MAX_PATH и SHGetFolderPath
+#include <thread>	// Для работы с потоками
+#include <chrono>	// Для работы со временем
+#include <conio.h>	// Для getch
 
 using namespace std;
 
@@ -52,5 +55,8 @@ int subjectscount = 0;
 double pupilcount = 0;
 int wordsize = 0;
 bool badword = false;
+char enteredvalue2;		// Для проверки Esc
+string enteredword2;		// Для проверки Esc
 
 int showfullinfo(string& enteredvalue);
+void enterEsc();
