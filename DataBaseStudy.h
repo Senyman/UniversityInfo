@@ -59,4 +59,5 @@ char enteredvalue2;		// Для проверки Esc
 string enteredword2;		// Для проверки Esc
 
 int showfullinfo(string& enteredvalue);
-void enterEsc();
+void checkinput();
+void closeallfiles();

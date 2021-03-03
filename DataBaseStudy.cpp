@@ -24,21 +24,23 @@ int main()
 
     SHGetFolderPath(NULL, CSIDL_DESKTOPDIRECTORY | CSIDL_FLAG_CREATE, NULL, SHGFP_TYPE_CURRENT, pathData);  // pathData - путь к рабочему столу
 
-    cout << "Здравствуйте пользователь. Цель данной программы - взаимодействие с базой данных студентов и их оценок" << endl;
+    cout << "Здравствуйте пользователь. Цель данной программы - взаимодействие с базой данных студентов и их оценок." << endl;
     cout << "Выберите действие ниже и введите соответствующую цифру" << endl << endl;
 
     do
     {
+        closeallfiles();
         cout << "0 - Закрыть программу" << endl
             << "1 - Вывести данные" << endl
             << "2 - Сформировать файл с данными" << endl
             << "13 - Подсказки и помощь" << endl
-            << "14 - Показать больше действий" << endl << endl
-            << "Введите номер действия: "<<endl;
+            << "14 - Показать больше действий" << endl
+            << "Esc - Вернуться в главное меню"<< endl << endl
+            << "Введите номер действия: ";
 
         string enteredvalue;
         int maxsize = 0;
-        enterEsc();
+        checkinput();
         if (enteredvalue2 == 27) continue;
         enteredvalue = enteredword2;
         // cin >> enteredvalue;
@@ -104,9 +106,9 @@ int main()
                 else if (a == 1)
                 {
                     string str;
-                    if (maxsize <= 7)  cout << "\n\nNum\tSurname\t"; // Табуляция, если длинная фамилия
-                    else if (maxsize <= 16) cout << "\n\nNum\tSurname\t\t";
-                    else cout << "\n\nNum\tSurname\t\t\t";
+                    if (maxsize <= 7)  cout << "\nNum\tSurname\t"; // Табуляция, если длинная фамилия
+                    else if (maxsize <= 16) cout << "\nNum\tSurname\t\t";
+                    else cout << "\nNum\tSurname\t\t\t";
 
                     while (!fin.eof())
                     {
@@ -139,7 +141,9 @@ int main()
                         string enteredword;
                         bool foundoverlap = false;
                         cout << "Введите номер студента: ";
-                        cin >> enteredword;
+                        checkinput();
+                        if (enteredvalue2 == 27) continue;
+                        enteredword = enteredword2;
                         while (!finKeys.eof() && !finRatings.eof() && !fin.eof())
                         {
                             str = "";
@@ -161,10 +165,10 @@ int main()
                                     }
                                     if (str2[i] == '0') subjectscount--;
                                 }
-                                cout << "Среднее орифметическое значение всех оценок за семестр студента c фамилией: " << strname << " = " << summ / subjectscount << "\n\n";
+                                cout << endl<<"Среднее орифметическое значение всех оценок за семестр студента c фамилией: " << strname << " = " << summ / subjectscount << "\n\n";
                             }
                         }
-                        if (!foundoverlap) cout << "Студента под номером: " << enteredword << " не существует\n";
+                        if (!foundoverlap) cout << "Студента под номером " << enteredword << " не существует\n";
                     }
                     else
                     {
@@ -285,7 +289,7 @@ int main()
                 {
                     {
                         string str;
-                        if (a == 4) cout << endl << endl;
+                        if (a == 4) cout << endl;
                         if (maxsize > 16)
                         {
                             fout << "Num\tSurname\t\t\t";
@@ -521,7 +525,7 @@ int main()
                                 if (a == 4)cout << allratings[i] << endl;
                             }
                         }
-                        cout << endl << endl;
+                        cout << endl;
                         delete[] keys;
                         delete[] pupil;
                         delete[] allratings;
@@ -558,7 +562,7 @@ int main()
                                 fout << infostring[i] << endl;
                                 cout << infostring[i] << endl;
                             }
-                            cout << endl << endl;
+                            cout << endl;
                         }
                         delete[] infostring;
                         fin.close();
@@ -613,28 +617,43 @@ int main()
                     string newname;
                     string newpatronumic;
                     string newpupilratings;
-                    string keystr;
+                    string keystr = "";
                     int lastkey = 0;
                     wordsize = 0;
 
                     cout << "Введите фамилию студента: ";
-                    cin >> newsurname;
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    newsurname = enteredword2;
+                    // cin >> newsurname;
                     while (newsurname.length() > 19)
                     {
                         cout << "Фамилия студента должна быть короче 19 символов. Введите фамилию еще раз: ";
-                        cin >> newsurname;
+                        checkinput();
+                        if (enteredvalue2 == 27) continue;
+                        newsurname = enteredword2;
+                        // cin >> newsurname;
                     }
-                    cout << "Введите имя студента: ";
-                    cin >> newname;
-                    cout << "Введите отчество студента: ";
-                    cin >> newpatronumic;
+                    cout << "\nВведите имя студента: ";
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    newname = enteredword2;
+                    // cin >> newname;
+                    cout << "\nВведите отчество студента: ";
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    newpatronumic = enteredword2;
+                    // cin >> newpatronumic;
 
                     // Добавляю индекс нового студента
                     while (!finKeys.eof()) getline(finKeys, keystr);     // Нахожу последний индекс по возрастанию
 
                     lastkey = stoi(keystr) + 1;   // Преобразую string в int
-                    cout << "Для этих предметов: " << allsubjects << "введите оценки студента: ";
-                    cin >> newpupilratings;
+                    cout << "\nДля этих предметов: " << allsubjects << "введите оценки студента: ";
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    newpupilratings = enteredword2;
+                    // cin >> newpupilratings;
 
                     wordsize = newpupilratings.length();			// Вычисляем количество символов в строке
                     bool err = false;						        // Если err true, то введенное число некорректно
@@ -655,10 +674,13 @@ int main()
 
                     while (err)
                     {
-                        cout << "Вы ввели неправильные значения: " << newpupilratings << endl
+                        cout << "\nВы ввели неправильные значения: " << newpupilratings << endl
                             << "Необходимо слитно в порядке выведенных предметов, ввести целочисленные оценки от 0 до 5" << endl;
                         cout << "Введите оценки студента по предметам " << allsubjects << ": ";
-                        cin >> newpupilratings;
+                        checkinput();
+                        if (enteredvalue2 == 27) break;
+                        newpupilratings = enteredword2;
+                        // cin >> newpupilratings;
                         wordsize = newpupilratings.length();
                         err = false;
                         for (int i = 0; i < subjectscount; i++)
@@ -675,6 +697,7 @@ int main()
                             }
                         }
                     }
+                    if (enteredvalue2 == 27) continue;
 
                     foutKeys << endl << lastkey;
                     fout << endl << newsurname;
@@ -727,13 +750,14 @@ int main()
                 else
                 {
                     string str = "";     // В эти строки записываются данные из файлов
-                    string strlast;
+                    string strlast = "";
                     string* surnames = new string[pupilcount];
                     string* numes = new string[pupilcount];
                     string str2;
                     string strKeys;
                     string strStudent;
                     string penultimateword = "";
+                    string penultimateword2 = "";
                     string enteredkey;
                     string allpupils;
                     string strname;
@@ -763,7 +787,10 @@ int main()
                     cout << "Выберите номер студента, информацию о котором хотите удалить: " << endl;
                     for (int i = 0; i < pupilcount; i++) cout << numes[i] << " " << surnames[i] << endl;
                     cout << "Введите номер: ";
-                    cin >> enteredkey;
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    enteredkey = enteredword2;
+                    //cin >> enteredkey;
 
 
                     fin.open(pathStudents);
@@ -785,7 +812,10 @@ int main()
                     while (badenteredword)  // Проверка на корректость номера студента
                     {
                         cout << "Номера студента: " << enteredkey << " нет" << endl << "Попробуйте еще раз: ";
-                        cin >> enteredkey;
+                        checkinput();
+                        if (enteredvalue2 == 27) continue;
+                        enteredkey = enteredword2;
+                        // cin >> enteredkey;
                         for (int i = 0; !fin.eof(); i++)
                         {
                             getline(fin, str);
@@ -808,8 +838,17 @@ int main()
                     while (!finKeys.eof()) // Для отмены перехода на новую строчку после предыдущего элемента при удалении самого последнего
                     {
                         getline(finKeys, strlast);
+                    }
+                    finKeys.close();
+                    finKeys.open(pathKeys);
+                    while (!finKeys.eof()) // Для отмены перехода на новую строчку после предыдущего элемента при удалении самого последнего
+                    {
+                        getline(finKeys, penultimateword2);
                         getline(finKeys, penultimateword);
                     }
+                    if (penultimateword > penultimateword2) penultimateword = penultimateword2;
+                    finKeys.close();
+                    
 
                     finKeys.close();
                     finKeys.open(pathKeys);
@@ -817,19 +856,25 @@ int main()
 
                     ///////////////////////////////////////////////////////// Problem is choise
                     cout << "Вы действительно хотите удалить данные о студенте: " << strStudent << endl;
-                    cout << "Y - да, N - нет" << endl;
+                    cout << "y - да, n - нет";
 
-                    cin >> value;
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    value = enteredword2;
+                    // cin >> value;
                     cout << endl;
                     countPupilsRatings = 0;
                     fin.open(pathStudents);
-                    while (value != "Y" && value != "N")      // Проверка на корректность
+                    while (value != "y" && value != "n")      // Проверка на корректность
                     {
                         cout << "Неверный ввод, повторите попытку" << endl;
-                        cout << "Y -да, N - нет" << endl;
-                        cin >> value;
+                        cout << "y -да, n - нет";
+                        checkinput();
+                        if (enteredvalue2 == 27) continue;
+                        value = enteredword2;
+                        // cin >> value;
                     }
-                    if (value == "Y")
+                    if (value == "y")
                     {
                         while (!fin.eof())
                         {
@@ -899,7 +944,8 @@ int main()
                     }
                     else
                     {
-                        cout << "Отмена удаления данных студента" << endl;
+                        system("cls");
+                        cout << "Отмена удаления данных студента" << endl<<endl;
                         fin.close();
                         finRatings.close();
                         fout.close();
@@ -941,17 +987,23 @@ int main()
                 {
                     // Добавление предмета
                     string subject;
-                    cout << "Введите абривиатуру предмета (3 буквы): ";
-                    cin >> subject;
+                    cout << "Введите абривиатуру предмета (3 символа): ";
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    subject = enteredword2;
+                    // cin >> subject;
                     // Проверка вводимых данных
                     bool err = false;
-                    if (subject.length() > 3) err = true;
+                    if (subject.length() != 3) err = true;
 
                     while (err)
                     {
-                        cout << "Аббривиатура должна быть не более 3х символов\nПопробуйте еще раз: ";
-                        cin >> subject;
-                        if (subject.length() < 4) err = false;
+                        cout << "Количество символов не равно 3.\nПопробуйте еще раз: ";
+                        checkinput();
+                        if (enteredvalue2 == 27) continue;
+                        subject = enteredword2;
+                        // cin >> subject;
+                        if (subject.length() == 3) err = false;
                     }
 
                     while (!finLessons.eof())
@@ -967,14 +1019,16 @@ int main()
                     finLessons.open(pathLessons);
                     while (err)
                     {
-                        cout << "Такой предмет: " << subject << " уже есть, придумайте новый и повторите попытку\n";
-                        cout << "Введите абривиатуру предмета (3 буквы): ";
+                        cout<< "Количество символов не равно 3 или такой предмет: " << subject << " уже есть, повторите попытку:\n";
                         err = false;
-                        cin >> subject;
+                        checkinput();
+                        if (enteredvalue2 == 27) continue;
+                        subject = enteredword2;
+                        // cin >> subject;
                         while (!finLessons.eof())
                         {
                             getline(finLessons, lesson);
-                            if (subject == lesson)
+                            if (subject == lesson || subject.length() != 3)
                             {
                                 err = true;
                                 break;
@@ -987,8 +1041,12 @@ int main()
 
                     // Добавление расшифровки аббревиатуры введенного предмета
                     cout << "Введите расшифровку аббревиатуры: ";
-                    std::cin.ignore(INT_MAX, '\n');
-                    getline(cin, enteredfulllesson);
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    enteredfulllesson = enteredword2;
+
+                    // std::cin.ignore(INT_MAX, '\n');
+                    // getline(cin, enteredfulllesson);
 
                     string pupilratings;
                     string newpupilratings;
@@ -1002,25 +1060,32 @@ int main()
                         pupil = "";
                         newpupilratings = "";
                         getline(fin, pupil);
-                        cout << "Введите оценку студента: " << pupil << endl;
-                        cin >> newpupilratings;
+                        cout << "Введите оценку студента: " << pupil;
+                        checkinput();
+                        if (enteredvalue2 == 27) break;
+                        newpupilratings = enteredword2;
+                        // cin >> newpupilratings;
 
                         while (newpupilratings != "0" && newpupilratings != "1" && newpupilratings != "2" && newpupilratings != "3" && newpupilratings != "4" && newpupilratings != "5")
                         {
                             cout << "Вы ввели неправильную оценку или вообще не оценку: " << newpupilratings << endl;
                             cout << "Повторите попытку: ";
-                            cin >> newpupilratings;
+                            checkinput();
+                            if (enteredvalue2 == 27) continue;
+                            newpupilratings = enteredword2;
+                            // cin >> newpupilratings;
                         }
 
-                        getline(finRatings, pupilratings);      // Считываем оценки для каждого студента
+                        // getline(finRatings, pupilratings);      // Считываем оценки для каждого студента
                         arrratings[countfineof - 1] = newpupilratings;
                     }
-
+                    if (enteredvalue2 == 27) continue;
                     fin.close();
                     fin.open(pathStudents);
                     countfineof = 0;
                     while (!fin.eof())
                     {
+                        getline(finRatings, pupilratings);      // Считываем оценки для каждого студента
                         getline(fin, pupil);        // Для того, что бы счетчик не был бесконечен
                         countfineof++;
                         if (pupilcount != countfineof) ratingsfout << pupilratings + "   " + arrratings[countfineof - 1] << endl;     // Выводим данные в буферный файл и прибавляем новую оценку
@@ -1082,8 +1147,11 @@ int main()
                     fin.open(pathLessons);
 
                     strcount = 0;
-                    cout << "Введите предмет из существующих в базе: " << lessons << endl;      // Ввод аббревиатуры предмета
-                    cin >> enteredlesson;
+                    cout << "Введите предмет из существующих в базе: " << lessons;      // Ввод аббревиатуры предмета
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    enteredlesson = enteredword2;
+                    // cin >> enteredlesson;
 
                     while (!fin.eof())
                     {
@@ -1105,7 +1173,10 @@ int main()
                     {
                         strcount = 0;
                         cout << "Такого предмета нет, повторите попытку.\nВведите предмет из существующих в базе: ";
-                        cin >> enteredlesson;
+                        checkinput();
+                        if (enteredvalue2 == 27) continue;
+                        enteredlesson = enteredword2;
+                        // cin >> enteredlesson;
 
                         while (!fin.eof())
                         {
@@ -1125,18 +1196,23 @@ int main()
 
                     // Проверка, действительно ли хочет удалить данные 
                     string choise;
-                    cout << "Вы действительно хотите удалить информацию о предмете " << enteredlesson << " ?" << endl;
-                    cout << "Y - да, N - нет" << endl;
-
-                    cin >> choise;
+                    cout << "Вы действительно хотите удалить информацию о предмете " << enteredlesson << "?" << endl;
+                    cout << "y - да, n - нет";
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    choise = enteredword2;
+                    // cin >> choise;
                     cout << endl;
-                    while (choise != "Y" && choise != "N")      // Проверка на корректность
+                    while (choise != "y" && choise != "n")      // Проверка на корректность
                     {
                         cout << "Неверный ввод, повторите попытку" << endl;
-                        cout << "Y -да, N - нет" << endl;
-                        cin >> choise;
+                        cout << "y -да, n - нет" << endl;
+                        checkinput();
+                        if (enteredvalue2 == 27) continue;
+                        choise = enteredword2;
+                        // cin >> choise;
                     }
-                    if (choise == "N")
+                    if (choise == "n")
                     {
                         fin.close();
                         finRatings.close();
@@ -1232,7 +1308,6 @@ int main()
                 if (!finLessons.is_open() && !finSubjects.is_open()) cout << "Ошибка открытия файла" << endl;
                 else
                 {
-                    cout << endl << endl;
                     cout << "Данные о предметах" << endl;
 
                     while (!finLessons.eof() && !finSubjects.eof())
@@ -1278,7 +1353,10 @@ int main()
                     finLessons.close();
                     finLessons.open(pathLessons);
                     cout << "Введите аббревиатуру предмета из предложенных, расшифровку для которого хотите написать: ";
-                    cin >> subj;
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    subj = enteredword2;
+                    // cin >> subj;
 
                     while (!finLessons.eof())
                     {
@@ -1298,7 +1376,10 @@ int main()
                         lessonscount = 0;
                         equal = false;
                         cout << "Такой аббревиатуры нет. Повторите попытку: ";
-                        cin >> subj;
+                        checkinput();
+                        if (enteredvalue2 == 27) break;
+                        subj = enteredword2;
+                        // cin >> subj;
                         while (!finLessons.eof())
                         {
                             getline(finLessons, lesson);
@@ -1311,11 +1392,15 @@ int main()
                         }
                         finLessons.close();
                     }
+                    if (enteredvalue2 == 27) continue;
 
                     cout << "Введите расшифровку аббревиатуры: ";
                     // cin.clear();
-                    std::cin.ignore(INT_MAX, '\n');
-                    getline(cin, enteredfulllesson);
+                    //std::cin.ignore(INT_MAX, '\n');
+                    //getline(cin, enteredfulllesson);
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    enteredfulllesson = enteredword2;
 
                     while (!finSubjects.eof())
                     {
@@ -1377,7 +1462,10 @@ int main()
                     string enteredword;         // Переменная для номера студента
                     bool foundoverlap = false;  // Если номер студента соответствует введенному
                     cout << "Введите номер студента: ";
-                    cin >> enteredword;
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    enteredword = enteredword2;
+                    // cin >> enteredword;
 
                     while (!finKeys.eof())
                     {
@@ -1407,7 +1495,10 @@ int main()
                     {
                         cout << "Нет такого номера студента: " << enteredword << endl;
                         cout << "Повторите попытку: ";
-                        cin >> enteredword;
+                        checkinput();
+                        if (enteredvalue2 == 27) break;
+                        enteredword = enteredword2;
+                        // cin >> enteredword;
                         while (!finKeys.eof())
                         {
                             ratingstrnum++;
@@ -1425,6 +1516,7 @@ int main()
                             }
                         }
                     }
+                    if (enteredvalue2 == 27) continue;
                     finKeys.close();
                     finRatings.close();
                     finStudents.close();
@@ -1438,7 +1530,10 @@ int main()
                     finLessons.close();
 
                     cout << "Введите предмет из предложенных, для которого хотите изменить оценку: ";
-                    cin >> enteredlesson;
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    enteredlesson = enteredword2;
+                    // cin >> enteredlesson;
 
                     finLessons.open(pathLessons);
                     found = false;
@@ -1463,9 +1558,12 @@ int main()
                     lessonnum = 0;
                     while (!found)
                     {
-                        cout << "Нет такого предмета: " << enteredlesson;
+                        cout << "Нет такого предмета: " << enteredlesson<<endl;
                         cout << "Повторите попытку: ";
-                        cin >> enteredlesson;
+                        checkinput();
+                        if (enteredvalue2 == 27) continue;
+                        enteredlesson = enteredword2;
+                        // cin >> enteredlesson;
                         while (!finLessons.eof())
                         {
                             lessonnum++;
@@ -1482,15 +1580,22 @@ int main()
                     }
 
                     // Ввод оценки, которую я хочу присвоить вместо текущей 
-                    cout << "Введите новую оценку для предмета: " << enteredlesson << " студента с фамилией: " << foundsurname << " и номером: " << enteredword << endl;
-                    cin >> studentvalue;
+                    cout << "Введите новую оценку для предмета: " << enteredlesson << " студента с фамилией: " << foundsurname << " и номером: " << enteredword;
+                    checkinput();
+                    if (enteredvalue2 == 27) continue;
+                    studentvalue = enteredword2[0];
+                    // cin >> studentvalue;
 
                     while (studentvalue != '0' && studentvalue != '1' && studentvalue != '2' && studentvalue != '3' && studentvalue != '4' && studentvalue != '5')
                     {
                         cout << "Вы ввели неправильную оценку или вообще не оценку: " << studentvalue << endl;
                         cout << "Повторите попытку: ";
-                        cin >> studentvalue;
+                        checkinput();
+                        if (enteredvalue2 == 27) break;
+                        studentvalue = enteredword2[0];
+                        //cin >> studentvalue;
                     }
+                    if (enteredvalue2 == 27) continue;
 
                     // Считываем информацию из файла с оценками и добавляем в буферный файл измененную сроку с оценками
                     finRatings.open(pathRatings);
@@ -1500,7 +1605,7 @@ int main()
                     {
                         ratingstrnum++;
                         getline(finRatings, ratingstr);
-                        cout << ratingstr << endl;
+                        // cout << ratingstr << endl;
 
                         if (ratingstrnum != ratingstrnumforchange) // Находим строчку с оценками, которая соответствует введенному студенту (его номеру)
                         {
@@ -1544,8 +1649,7 @@ int main()
                     << "для студента Сидорова необходимо ввести оценки 4 5 4 5 по следующим предметам Rus Mat Lit Phy соответственно." << endl
                     << "Вводим Sidorov, жмем Enter, вводим 4545, жмем Enter." << endl
                     << "Если не хотите добавлять оценку, введите значение 0 (в расчетах не учитывается);\n\n"
-                    << "  7 - \"Удалить данные о студенте\". Для удаления данных о студенте, достаточно ввести его номер. Номер можно" << endl
-                    << "узнать, выбрав действие 1 (первый столбец Num);" << endl
+                    << "  7 - \"Удалить данные о студенте\". Для удаления данных о студенте, достаточно ввести его номер" << endl
                     << "  8 - \"Добавить данные о предмете\". Необходимо добавить предмет обучения, введя аббривиатуру из 3х символов," << endl
                     << "расшифровку аббривиатуры, а также для каждого из студентов ввести оценку за четверть;" << endl
                     << "  9 - \"Удалить данные о предмете и всю связанную с ним информацию\". Необходимо ввести только аббривиатуру" << endl
@@ -1554,7 +1658,8 @@ int main()
                     << "  11 - \"Добавить рашифровку аббревиатуры для предмета\". Сначала необходимо ввести аббревиатуру из 3х символов," << endl
                     << "затем ввести расшифровку предмета обучения;" << endl
                     << "  12 - \"Изменить оценку студента\". Дает возможность изменить одну оценку ученика по конкретному предмету;" << endl
-                    << "Если возникнут вопросы, обращайтесь к системному администратору" << endl << endl << endl;
+                    << "  Esc - \"Выйти в главное меню\". Завершит текущее действие и выйдет в главное меню;" << endl
+                    << "Если возникнут вопросы, обращайтесь к системному администратору"<<endl << endl << endl;     
             }
             else exit(0);
         }
@@ -1577,7 +1682,7 @@ int showfullinfo(string &enteredvalue)
             << "4 - Сформировать файл со студентами и их оценками, отсортированными по алфавиту от А до Я и вывести данные на экран" << endl
             << "5 - Сформировать файл со студентами и их оценками, отсортированными по алфавиту от Я до А и вывести данные на экран" << endl
             << "6 - Добавить студента и его оценки в базу данных" << endl
-            << "7 - Удалить данные о студенте. Сначала рекомендуется выполнить действие 1 (узнать номер студента)" << endl
+            << "7 - Удалить данные о студенте" << endl
             << "8 - Добавить данные о предмете" << endl
             << "9 - Удалить данные о предмете и всю связанную с ним информацию" << endl
             << "10 - Вывести данные с расшифровкой аббревиатур предметов" << endl
@@ -1606,13 +1711,13 @@ int showfullinfo(string &enteredvalue)
         }
     } while (badword);
 }
-void enterEsc()
+void checkinput()
 {
 
 
     enteredvalue2 = 8;
     enteredword2 = "";
-
+    cout << endl;
     do  // цикл всей программы
     {
         enteredvalue2 = _getch();
@@ -1641,5 +1746,33 @@ void enterEsc()
         }
 
     } while (true);
+    cout << endl;
+
+}
+void closeallfiles()
+{
+    fout.close();
+    ratingsfout.close();
+    foutKeys.close();
+    foutSubjects.close();
+    foutSubjectsbuf.close();
+    foutnames.close();
+    foutpatronymics.close();
+    fin.close();
+    finRatings.close();
+    finStudents.close();
+    finKeys.close();
+    finLessons.close();
+    finSubjects.close();
+    finNames.close();
+    finPatronymics.close();
+
+    remove("BufferKeys.txt");
+    remove("BufferLessons.txt");
+    remove("BufferNames.txt");
+    remove("BufferPatronymics.txt");
+    remove("BuffRatings.txt");
+    remove("BuffStud.txt");
+    remove("BuffSubjects.txt");
 
 }
