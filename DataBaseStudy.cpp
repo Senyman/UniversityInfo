@@ -65,7 +65,7 @@ int main()
                 else if (enteredvalue == "13") a = 13;
                 else a = enteredvalue[0] - 48;
             }
-
+            if (enteredvalue == "14" && a == 1) continue;
             subjectscount = 0;
             fin.open(pathLessons);       // Считаем количество предметов
             if (!fin.is_open()) cout << "Ошибка открытия файла" << endl;
@@ -138,9 +138,39 @@ int main()
 
                     if (a == 3) // Средняя арифметическая оценка студента 
                     {
+                        string* surnames = new string[pupilcount];
+                        string* numes = new string[pupilcount];
                         string enteredword;
                         bool foundoverlap = false;
-                        cout << "Введите номер студента: ";
+
+
+                        // Записываю фамилии всех студентов в массив surnames[i]
+                        for (int i = 0; !fin.eof(); i++)
+                        {
+                            str = "";
+                            getline(fin, str);
+                            surnames[i] = str;
+                        }
+                        fin.close();
+                        // Записывю все номера студентов в массив
+                        for (int i = 0; !finKeys.eof(); i++)
+                        {
+                            str = "";
+                            getline(finKeys, str);
+                            numes[i] = str;
+                        }
+                        finKeys.close();
+
+                        fin.open(pathStudents);
+                        finKeys.open(pathKeys);
+
+                        cout << "Выберите номер студента, информацию о котором хотите вывести: " << endl;
+                        for (int i = 0; i < pupilcount; i++) cout << numes[i] << " " << surnames[i] << endl;
+                        delete[] surnames;
+                        delete[] numes;
+
+
+                        cout << "Введите номер: ";
                         checkinput();
                         if (enteredvalue2 == 27) continue;
                         enteredword = enteredword2;
@@ -165,6 +195,7 @@ int main()
                                     }
                                     if (str2[i] == '0') subjectscount--;
                                 }
+                                if (subjectscount == 0) subjectscount = 1;
                                 cout << endl<<"Среднее орифметическое значение всех оценок за семестр студента c фамилией: " << strname << " = " << summ / subjectscount << "\n\n";
                             }
                         }
@@ -1690,7 +1721,10 @@ int showfullinfo(string &enteredvalue)
             << "12 - Изменить оценку студента" << endl
             << "13 - Подсказки и помощь" << endl << endl
             << "Введите номер действия: ";
-        cin >> enteredvalue;
+
+        checkinput();
+        if (enteredvalue2 == 27) continue;
+        enteredvalue = enteredword2;
         wordsize = enteredvalue.length();
         const char* str = enteredvalue.c_str();
         if ((wordsize > 1 || !isdigit(str[0])) && enteredvalue != "10" && enteredvalue != "11" && enteredvalue != "12" && enteredvalue != "13")
@@ -1713,8 +1747,6 @@ int showfullinfo(string &enteredvalue)
 }
 void checkinput()
 {
-
-
     enteredvalue2 = 8;
     enteredword2 = "";
     cout << endl;

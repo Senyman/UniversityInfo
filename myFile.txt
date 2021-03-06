@@ -1,6 +1,5 @@
-Num	Surname		Rus Mat Phy Lit 
-1	X Y.Z.		1   2   3   4
-3	Sidorov V.S.	4   4   4   4
-4	Repov K.M.	2   2   3   5
-2	Petrov S.P.	4   5   1   2
-5	Lapnikov P.I.	1   2   5   3
+1	Sidorov A.N.	4   3   4   4
+2	Petrov D.P.	2   4   3   5
+3	Terentyeva N.N.	4   4   4   4
+4	Repov D.M.	5   5   4   5
+5	Lapnikov Y.S.	4   3   5   3
